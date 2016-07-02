@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="css/magnifying.css" rel="stylesheet"/>
+</head>
+<body>
+<div id="main">
+    <div id="small">
+        <div id="mark"></div>
+    </div>
+    <div id="nav">
+        <ul>
+        </ul>
+    </div>
+    <div id="big">
+    </div>
+</div>
+</body>
+<script src="js/jquery-1.11.3.js"></script>
+<script src="js/magnifying.js"></script>
+<script>
+    var href = location.href;
+    var id = href.split("?")[1].split("=")[1];
+
+    var LOL= {
+        ajax:function(json){
+            var req = new XMLHttpRequest();
+            req.open(json.type, json.url, true);
+            req.onreadystatechange = function () {
+                if (req.readyState == 4) {
+                    if (req.status == 200) {
+                        json.success(req.responseText);
+                    }
+                }
+            }
+            req.send();
+        }
+    }
+    LOL.ajax({
+        type:"get",
+        url:"mockData/catalogue.json",
+        success:function(data) {
+            var content = data;
+            var jsonList = JSON.parse(content); //返回的是一个集合
+            for (var i = 0; i < jsonList.length; i++) {
+                if (jsonList[i].id == id) {
+                    var dataSource = jsonList[i].dataSource;
+                    init(dataSource);
+                    break;
+                }
+            }
+        }
+    })
+
+
+
+//    ajax({
+//        type: "get", url: "mockData/catalogue.json", success: function (data) {
+//            var content = data;
+//            var jsonList = JSON.parse(content); //返回的是一个集合
+//            for (var i = 0; i < jsonList.length; i++) {
+//                if (jsonList[i].id == id) {
+//                    var dataSource = jsonList[i].dataSource;
+//                    init(dataSource);
+//                    break;
+//                }
+//            }
+//        }
+//    })
+    //请求的方式
+    //url会变
+    //返回内容不一样
+//    function ajax(json) {
+//        var req = new XMLHttpRequest();
+//        req.open(json.type, json.url, true);
+//        req.onreadystatechange = function () {
+//            if (req.readyState == 4) {
+//                if (req.status == 200) {
+//                    json.success(req.responseText);
+//                }
+//            }
+//        }
+//        req.send();
+//    }
+
+
+    //    var req = new XMLHttpRequest();
+    //    req.open("get", "mockData/catalogue.json", true);
+    //    req.onreadystatechange = function () {
+    //        if (req.readyState == 4) {
+    //            if (req.status == 200) {
+    //                var content = req.responseText;
+    //                var jsonList = JSON.parse(content); //返回的是一个集合
+    //                for (var i = 0; i < jsonList.length; i++) {
+    //                    if (jsonList[i].id == id) {
+    //                        var dataSource = jsonList[i].dataSource;
+    //                        init(dataSource);
+    //                        break;
+    //                    }
+    //
+    //                }
+    //            }
+    //        }
+    //    }
+    //    req.send();
+
+
+</script>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="result"></div>
+<div id="result1"></div>
+</body>
+<script>
+    sum({num1:50,num2:50,num3:55,success:function(data){
+        document.getElementById("result").innerHTML = data;
+    }})
+    sum({num1:50,num2:10,num3:55,success:function(data){
+        document.getElementById("result1").innerHTML = data;
+    }})
+
+    function sum(json) {
+        var num1 = json.num1;
+        var num2 = json.num2;
+        var num3 = json.num3;
+        var result = num1+num2+num3;
+        json.success(result)
+    }
+
+</script>
+</html>

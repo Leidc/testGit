@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>放大镜</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        #main {
+            position: relative;
+            height: 500px;
+            width: 400px;
+            left: 100px;
+            top: 50px;
+        }
+
+        #main #small {
+            height: 400px;
+            width: 400px;
+            position: relative;
+        }
+
+        #main #small #mark {
+            height: 200px;
+            width: 200px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: rgba(255, 205, 200, 0.8);
+            display: none;
+        }
+
+        #main #small img {
+            height: 400px;
+            width: 400px;
+        }
+
+        #main #nav {
+            position: absolute;
+            top: 420px;
+            left: 0;
+        }
+
+        #main #nav ul {
+            list-style: none;
+        }
+
+        #main #nav ul li {
+            float: left;
+            border: 1px solid #cdcdcd;
+            margin-left: 10px;
+            padding: 4px;
+            cursor: pointer;
+        }
+
+        #main #nav ul li:hover {
+            border: 1px solid #343434;
+        }
+
+        #main #nav ul li img {
+            width: 80px;
+            height: 40px;
+            float: left;
+        }
+
+        #main #big {
+            position: absolute;
+            left: 450px;
+            top: 0;
+            height: 400px;
+            width: 400px;
+            overflow: hidden;
+            display: none;
+
+        }
+
+        #main #big img {
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+<div id="main">
+    <div id="small">
+        <img src="img/small1.jpg"/>
+        <div id="mark"></div>
+    </div>
+    <div id="nav">
+        <ul>
+            <li><img src="img/small1.jpg" data-bigSrc="img/big1.jpg"></li>
+            <li><img src="img/small2.jpg" data-bigSrc="img/big2.jpg"></li>
+            <li><img src="img/small3.jpg" data-bigSrc="img/big3.jpg"></li>
+            <li><img src="img/small4.jpg" data-bigSrc="img/big4.jpg"></li>
+        </ul>
+    </div>
+    <div id="big">
+        <img src="img/big1.jpg"/>
+    </div>
+</div>
+</body>
+<script src="js/jquery-1.11.3.js"></script>
+<script>
+
+    $("#nav ul li img").hover(function (e) {
+        var src = $(this).attr("src");
+        $("#small").find("img:eq(0)").attr("src", src);
+        var bigSrc = $(this).attr("data-bigSrc");
+        $("#big").find("img:eq(0)").attr("src", bigSrc);
+    });
+
+    $("#small").mouseover(function () {
+        $("#mark").show();
+        $("#big").show();
+    }).mouseout(function () {
+        $("#mark").hide();
+        $("#big").hide();
+    });
+    $("#small").mousemove(function (event) {
+        var evt = window.event || event;
+        var x = evt.clientX - $(this).offset().left - $("#mark").width() / 2;
+        var y = evt.clientY - $(this).offset().top - $("#mark").height() / 2;
+        if (x <= 0) {
+            x = 0;
+        }
+        if (x >= $(this).width() - $("#mark").width()) {
+            x = $(this).width() - $("#mark").width();
+        }
+        if (y <= 0) {
+            y = 0;
+        }
+        if (y > $(this).height() - $("#mark").height()) {
+            y = $(this).height() - $("#mark").height();
+        }
+        var bigX = (x / $("#small").width()) * $("#big img").width();
+        var bigY = (y / $("#small").height()) * $("#big img").height();
+        $("#mark").css({"left": x, "top": y});
+        $("#big img").css({"left": -bigX, "top": -bigY});
+    });
+</script>
+</html>

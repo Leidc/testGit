@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>放大镜</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        #main {
+            position: relative;
+            left: 100px;
+            top: 50px;
+        }
+
+        #main #small {
+            height: 400px;
+            width: 400px;
+            position: relative;
+        }
+
+        #main #small #mark {
+            height: 200px;
+            width: 200px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: rgba(255, 205, 200, 0.8);
+            display: none;
+        }
+
+        #main #small img {
+            height: 400px;
+            width: 400px;
+        }
+
+        #main #big {
+            position: absolute;
+            left: 450px;
+            top: 0;
+            height: 400px;
+            width: 400px;
+            overflow: hidden;
+            display: none;
+
+        }
+
+        #main #big img {
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+<div id="main">
+    <div id="small">
+        <img src="img/small2.jpg"/>
+        <div id="mark"></div>
+    </div>
+
+    <div id="big">
+        <img src="img/big2.jpg"/>
+    </div>
+</div>
+</body>
+<script src="js/jquery-1.11.3.js"></script>
+<script>
+
+    $("#small").mouseover(function () {
+        $("#mark").show();
+        $("#big").show();
+    }).mouseout(function () {
+        $("#mark").hide();
+        $("#big").hide();
+    });
+    $("#small").mousemove(function (event) {
+        var evt = window.event || event;
+        var x = evt.clientX - $(this).offset().left - $("#mark").width() / 2;
+        var y = evt.clientY - $(this).offset().top - $("#mark").height() / 2;
+        if (x <= 0) {
+            x = 0;
+        }
+        if (x >= $(this).width() - $("#mark").width()) {
+            x = $(this).width() - $("#mark").width();
+        }
+        if (y <= 0) {
+            y = 0;
+        }
+        if (y > $(this).height() - $("#mark").height()) {
+            y = $(this).height() - $("#mark").height();
+        }
+        var bigX = (x / $("#small").width()) * $("#big img").width();
+        var bigY = (y / $("#small").height()) * $("#big img").height();
+        $("#mark").css({"left": x, "top": y});
+        $("#big img").css({"left": -bigX, "top": -bigY});
+    });
+
+</script>
+</html>

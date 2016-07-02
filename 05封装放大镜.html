@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>放大镜</title>
+   <link href="css/magnifying.css" rel="stylesheet">
+</head>
+<body>
+<div id="main">
+    <div id="small">
+        <div id="mark"></div>
+    </div>
+    <div id="nav">
+        <ul>
+        </ul>
+    </div>
+    <div id="big">
+    </div>
+</div>
+</body>
+<script src="js/jquery-1.11.3.js"></script>
+<script src="js/magnifying.js"></script>
+<script>
+    var dataSource = {
+        smallList: ["motoPic1.jpg", "girlsmall1.jpg", "small3.jpg", "small4.jpg"],
+        bigList: ["motoPicbig1.jpg", "girlbig1.jpg", "big3.jpg", "big4.jpg"]
+    }
+    init(dataSource);
+</script>
+</html>

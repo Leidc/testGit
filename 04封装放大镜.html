@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>放大镜</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        #main {
+            position: relative;
+            height: 500px;
+            width: 400px;
+            left: 100px;
+            top: 50px;
+        }
+
+        #main #small {
+            height: 400px;
+            width: 400px;
+            position: relative;
+        }
+
+        #main #small #mark {
+            height: 200px;
+            width: 200px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: rgba(255, 205, 200, 0.8);
+            display: none;
+        }
+
+        #main #small img {
+            height: 400px;
+            width: 400px;
+        }
+
+        #main #nav {
+            position: absolute;
+            top: 420px;
+            left: 0;
+        }
+
+        #main #nav ul {
+            list-style: none;
+        }
+
+        #main #nav ul li {
+            float: left;
+            border: 1px solid #cdcdcd;
+            margin-left: 10px;
+            padding: 4px;
+            cursor: pointer;
+        }
+
+        #main #nav ul li:hover {
+            border: 1px solid #343434;
+        }
+
+        #main #nav ul li img {
+            width: 80px;
+            height: 40px;
+            float: left;
+        }
+
+        #main #big {
+            position: absolute;
+            left: 450px;
+            top: 0;
+            height: 400px;
+            width: 400px;
+            overflow: hidden;
+            display: none;
+
+        }
+
+        #main #big img {
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+<div id="main">
+    <div id="small">
+        <div id="mark"></div>
+    </div>
+    <div id="nav">
+        <ul>
+        </ul>
+    </div>
+    <div id="big">
+    </div>
+</div>
+</body>
+<script src="js/jquery-1.11.3.js"></script>
+<script src="js/magnifying.js"></script>
+<script>
+    var dataSource = {
+        smallList: ["small1.jpg", "small2.jpg", "small3.jpg", "small4.jpg"],
+        bigList: ["big1.jpg", "big2.jpg", "big3.jpg", "big4.jpg"]
+    }
+    init(dataSource);
+
+</script>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<ul id="detailList">
+    <li id="001">衣服详情</li>
+    <li id="002">自行车详情</li>
+    <li id="003">裙子详情</li>
+</ul>
+</body>
+<script src="js/jquery-1.11.3.js"></script>
+<script>
+$("#detailList li").click(function(){
+    var id=$(this).attr("id");
+    window.location.href = "09item.html?id="+id;
+
+
+});
+</script>
+</html>
